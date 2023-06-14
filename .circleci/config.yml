@@ -3,8 +3,8 @@ version: 2.1
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-    parameters:
-      # Add parameter here   
+    # parameters:
+    #   # Add parameter here   
     steps:
       - run:
           name: Destroy environments
@@ -152,7 +152,7 @@ jobs:
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt
-         - persist_to_workspace:
+      - persist_to_workspace:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt

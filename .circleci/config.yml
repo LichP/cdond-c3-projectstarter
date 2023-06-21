@@ -281,7 +281,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: cimg/aws-2023.06
+      - image: cimg/aws:2023.06
     steps:
       - checkout
       - run:

@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0
+
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -163,6 +166,7 @@ jobs:
       - image: python:3.11-alpine
     steps:
       - checkout
+      - aws-cli/install
       - add_ssh_keys:
           fingerprints: ["f9:56:6d:26:e1:e4:f5:41:c2:17:37:30:d0:1b:a9:d0"]
       - attach_workspace:
@@ -183,6 +187,7 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - checkout
+      - aws-cli/install
       - run:
           name: Run migrations
           command: |

@@ -170,13 +170,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml
+            apk add --update ansible
       - run:
           name: Configure server
           command: |
-            # Your code here
-            exit 1
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:

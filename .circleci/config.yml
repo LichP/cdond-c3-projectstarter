@@ -273,7 +273,7 @@ jobs:
             cd .circleci/ansible
             echo "Contents of the inventory.txt file is -------"
             cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            ansible-playbook -i inventory.txt -vvv deploy-backend.yml
             ## Add small sleep to ensure server process has enough time to initialise before backend smoke test attempts to hit it
             sleep 5
       - revert-migrations:

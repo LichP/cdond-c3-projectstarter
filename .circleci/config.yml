@@ -372,14 +372,16 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
+            # Why does CircleCI make it so hard to persist environment across steps?
+            # There's literally no point in doing this bit in a separate step, it's
+            # just unnecessary pain
+      - run:
+          name: Remove old stacks and files
+          command: |
             ## Fetch the Old workflow ID
             export OLD_WORKFLOW_ID=$(cat ~/OldWorkflowID.txt)
             echo OLD_WORKFLOW_ID: "${OLD_WORKFLOW_ID}"
             echo CIRCLE_WORKFLOW_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
-            echo 'export OLD_WORKFLOW_ID=${OLD_WORKFLOW_ID}' >> "$BASH_ENV"
-      - run:
-          name: Remove old stacks and files
-          command: |
             ## Fetch the stack names
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
               --stack-status-filter CREATE_COMPLETE --no-paginate --output text))

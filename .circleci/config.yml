@@ -232,10 +232,6 @@ jobs:
           command: |
             # Using aws client from the orb, installed above with '-aws-cli/install'
       - run:
-          name: Deliberate failure to test revert-migrations
-          command: |
-            exit 1
-      - run:
           name: Get backend url
           command: |
             export BACKEND_IP=$(tail -n 1 .circleci/ansible/inventory.txt)
